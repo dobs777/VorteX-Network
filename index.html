@@ -1,0 +1,2665 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VorteX Network - Servidor Global de Hytale</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@700;900&family=Nunito+Sans:wght@400;600;700&family=Lexend:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ===== RESET E VARIÁVEIS ===== */
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #00d4ff;
+            --accent-glow: rgba(0, 212, 255, 0.4);
+            --gold: #ffd700;
+            --gold-dark: #b8860b;
+            --dark: #0a0e17;
+            --darker: #050811;
+            --light: #f8f9fa;
+            --gray: #a0a8b8;
+            --gray-dark: #6b7280;
+            --success: #00ff88;
+            --warning: #ffaa00;
+            --danger: #ff4757;
+            
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            --gradient-gold: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            --gradient-dark: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+            --spacing-xl: 3.5rem;
+            --spacing-xxl: 5rem;
+            
+            --border-radius-sm: 10px;
+            --border-radius-md: 15px;
+            --border-radius-lg: 20px;
+            --border-radius-xl: 30px;
+            
+            --transition-fast: 0.12s ease;
+            --transition-normal: 0.2s ease;
+            --transition-slow: 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        
+        body {
+            font-family: 'Jost', sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.7;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            min-height: 100vh;
+        }
+        
+        /* ===== BACKGROUND IMAGE ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Fotos/background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            z-index: -3;
+            opacity: 0.15;
+        }
+        
+        /* ===== OVERLAY GRADIENT ===== */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(106, 17, 203, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(37, 117, 252, 0.1) 0%, transparent 40%),
+                linear-gradient(45deg, rgba(5, 8, 17, 0.9), rgba(10, 14, 23, 0.8));
+            background-attachment: fixed;
+            z-index: -2;
+        }
+        
+        /* ===== TYPOGRAPHY IMPROVED ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: 1px;
+        }
+        
+        h1 {
+            font-size: clamp(2.8rem, 8vw, 4rem);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: var(--spacing-md);
+            text-shadow: 0 0 40px var(--accent-glow);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+        
+        h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--light);
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            padding-bottom: var(--spacing-sm);
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+        
+        .section-header h2 {
+            color: var(--accent);
+            text-align: center;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--light);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        h4 {
+            font-size: 1.15rem;
+            color: var(--light);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: var(--spacing-md);
+            font-weight: 400;
+        }
+        
+        .lead {
+            font-size: 1.2rem;
+            color: var(--gray);
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .text-accent {
+            color: var(--accent);
+        }
+        
+        /* ===== NAVBAR - CORRIGIDA ===== */
+        #navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            background: rgba(10, 14, 23, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all var(--transition-normal);
+            border-bottom: 1px solid rgba(106, 17, 203, 0.2);
+        }
+        
+        #navbar.scrolled {
+            padding: 0.7rem 5%;
+            background: rgba(10, 14, 23, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(106, 17, 203, 0.3);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Contêiner central para os links de navegação */
+        .nav-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: clamp(1rem, 2vw, 2rem);
+            align-items: center;
+            white-space: nowrap;
+            flex-wrap: nowrap;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: clamp(0.8rem, 0.9vw, 0.9rem);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--transition-fast);
+            position: relative;
+            padding: 0.4rem 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width var(--transition-normal);
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            margin-left: auto;
+        }
+        
+        .btn-discord {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            background: var(--gradient-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all var(--transition-normal);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            letter-spacing: 0.8px;
+            white-space: nowrap;
+        }
+        
+        .btn-discord:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.4);
+            background: var(--gradient-accent);
+        }
+        
+        /* Language Selector */
+        .language-selector {
+            position: relative;
+        }
+        
+        .current-language {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .current-language:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(106, 17, 203, 0.3);
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--dark);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-sm);
+            margin-top: var(--spacing-xs);
+            min-width: 180px;
+            display: none;
+            border: 1px solid rgba(106, 17, 203, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            z-index: 1001;
+        }
+        
+        .language-dropdown.show {
+            display: block;
+            animation: fadeIn 0.15s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .language-option {
+            padding: 0.7rem 1rem;
+            cursor: pointer;
+            border-radius: var(--border-radius-sm);
+            transition: background var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .language-option:last-child {
+            margin-bottom: 0;
+        }
+        
+        .language-option:hover {
+            background: rgba(106, 17, 203, 0.15);
+        }
+        
+        .language-option.active {
+            background: rgba(106, 17, 203, 0.2);
+            color: var(--accent);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.4rem;
+            color: var(--light);
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            margin-left: 0.5rem;
+        }
+        
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--spacing-xxl) 5% var(--spacing-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle at center, rgba(106, 17, 203, 0.2) 0%, transparent 60%);
+            z-index: -1;
+            animation: pulse 6s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        .hero-logo {
+            width: min(100%, 500px);
+            height: auto;
+            margin: var(--spacing-md) auto var(--spacing-md);
+            filter: drop-shadow(0 0 30px rgba(106, 17, 203, 0.6));
+            animation: float 5s ease-in-out infinite;
+            object-fit: contain;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: var(--spacing-lg);
+            max-width: 700px;
+            font-weight: 300;
+            line-height: 1.6;
+            padding: 0 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0 var(--spacing-xl);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.8rem 1.6rem;
+            background: var(--gradient-glass);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all var(--transition-normal);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            border-color: rgba(106, 17, 203, 0.3);
+        }
+        
+        .btn-twitter { color: #1DA1F2; }
+        .btn-twitter:hover { background: rgba(29, 161, 242, 0.1); }
+        
+        .btn-discord-hero { 
+            background: var(--gradient-primary);
+            border: none;
+        }
+        
+        .btn-discord-hero:hover { 
+            background: var(--gradient-accent);
+            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.4);
+        }
+        
+        .btn-youtube { color: #FF0000; }
+        .btn-youtube:hover { background: rgba(255, 0, 0, 0.1); }
+        
+        /* ===== COUNTDOWN ===== */
+        .countdown-container {
+            margin: var(--spacing-xl) auto 0;
+            width: 100%;
+            max-width: 700px;
+            padding: 0 20px;
+        }
+        
+        .countdown-wrapper {
+            padding: .3em;
+            border: 1px solid rgba(106, 17, 203, 0.5);
+            border-radius: 5px;
+            background: rgba(10, 14, 23, 0.7);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(106, 17, 203, 0.3);
+        }
+        
+        .countdown {
+            position: relative;
+            width: 100%;
+            height: 85px;
+            padding: .4em 0;
+            box-sizing: border-box;
+            background: linear-gradient(to bottom, rgba(106, 17, 203, 0.2), rgba(10, 14, 23, 0.9));
+            white-space: nowrap;
+            border-radius: 4px;
+        }
+        
+        .countdown .block {
+            display: inline-block;
+            width: 25%;
+            margin: 0;
+            padding: .2em 0;
+            box-sizing: border-box;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            line-height: 1.3;
+        }
+        
+        .countdown .block:last-child {
+            border: 0;
+        }
+        
+        .countdown .block .digits {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Lexend', sans-serif;
+            font-size: 2.1em;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-shadow: 0 0 10px rgba(106, 17, 203, 0.5);
+        }
+        
+        .countdown .block .label {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: .65em;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        .countdown-heading {
+            display: flex;
+            margin-bottom: 1.5rem;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .countdown-heading .decoration {
+            position: relative;
+            content: "";
+            display: inline-block;
+            flex: 1;
+            vertical-align: middle;
+            height: 1px;
+            min-width: 20px;
+        }
+        
+        .countdown-heading .decoration::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            display: block;
+            width: 11px;
+            height: 11px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .countdown-heading .decoration.left::before {
+            right: -10px;
+        }
+        
+        .countdown-heading .decoration.right::before {
+            left: -10px;
+        }
+        
+        .countdown-heading .decoration.left {
+            margin-right: 10px;
+            background: linear-gradient(to right, rgba(106, 17, 203, 0) 0%, var(--primary) 25%, var(--primary) 100%);
+        }
+        
+        .countdown-heading .decoration.right {
+            margin-left: 10px;
+            background: linear-gradient(to left, rgba(106, 17, 203, 0) 0%, var(--primary) 25%, var(--primary) 100%);
+        }
+        
+        .countdown-heading h1 {
+            display: inline-block;
+            margin: -1px 1.4em 0 1.4em;
+            padding: 0;
+            background: linear-gradient(var(--accent), #adcde2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Nunito Sans', sans-serif;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            min-width: 180px;
+            height: 28px;
+            text-align: center;
+        }
+        
+        /* ===== SECTIONS ===== */
+        section {
+            padding: var(--spacing-xl) 5%;
+            position: relative;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-top: -1rem;
+            margin-bottom: var(--spacing-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        /* ===== SERVER INFO ===== */
+        .server-info {
+            background: rgba(10, 14, 23, 0.7);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            border: 1px solid rgba(106, 17, 203, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .info-card {
+            background: var(--gradient-glass);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            transition: all var(--transition-normal);
+            border: 1px solid rgba(106, 17, 203, 0.1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(106, 17, 203, 0.2);
+        }
+        
+        .info-card i {
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: var(--spacing-md);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(106, 17, 203, 0.1);
+        }
+        
+        .info-card h3 {
+            margin-bottom: var(--spacing-md);
+            font-size: 1.3rem;
+            min-height: 3.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .info-card p {
+            margin-bottom: 0;
+            color: var(--gray);
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+        
+        /* ===== ROADMAP ===== */
+        .roadmap-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .roadmap-card {
+            background: var(--gradient-glass);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+            border: 1px solid rgba(106, 17, 203, 0.2);
+            position: relative;
+            transition: all var(--transition-normal);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .roadmap-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 12px 25px rgba(0, 212, 255, 0.15);
+        }
+        
+        .roadmap-number {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.3rem;
+            border: 4px solid var(--darker);
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+        
+        .roadmap-card h3 {
+            margin-top: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+            font-size: 1.4rem;
+            color: var(--accent);
+            text-align: center;
+            width: 100%;
+            min-height: 3.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .roadmap-card > p {
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+            font-weight: 600;
+            color: var(--light);
+            line-height: 1.4;
+        }
+        
+        .roadmap-card > p strong {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.1rem;
+        }
+        
+        .roadmap-card ul {
+            text-align: left;
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+            width: 100%;
+        }
+        
+        .roadmap-card li {
+            color: var(--gray);
+            margin-bottom: var(--spacing-sm);
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        .roadmap-card li:before {
+            content: "✓";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        /* ===== HOW TO PLAY ===== */
+        .how-to-play {
+            background: rgba(10, 14, 23, 0.8);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xl);
+            border: 1px solid rgba(106, 17, 203, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .step {
+            text-align: center;
+            padding: var(--spacing-lg);
+            background: var(--gradient-glass);
+            border-radius: var(--border-radius-lg);
+            transition: all var(--transition-normal);
+            border: 1px solid rgba(106, 17, 203, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .step:hover {
+            transform: translateY(-4px);
+            background: rgba(106, 17, 203, 0.08);
+            border-color: var(--primary);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 0 auto var(--spacing-md);
+            border: 4px solid rgba(106, 17, 203, 0.2);
+        }
+        
+        .step h3 {
+            margin-bottom: var(--spacing-md);
+            font-size: 1.25rem;
+            width: 100%;
+            min-height: 2.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .step p {
+            margin-bottom: 0;
+            color: var(--gray);
+            text-align: center;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        /* ===== IP SECTION (NOVA) ===== */
+        .ip-section {
+            text-align: center;
+            margin: var(--spacing-lg) auto;
+            max-width: 800px;
+        }
+        
+        .server-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+        
+        .server-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--gradient-glass);
+            border: 1px solid rgba(106, 17, 203, 0.2);
+            border-radius: var(--border-radius-md);
+            color: var(--gray);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            min-width: 200px;
+        }
+        
+        .server-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+        
+        .server-btn:hover:not(.active) {
+            background: rgba(106, 17, 203, 0.1);
+            border-color: rgba(106, 17, 203, 0.4);
+        }
+        
+        .ip-box {
+            background: var(--gradient-dark);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            margin: 0 auto;
+            max-width: 500px;
+            border: 2px solid rgba(106, 17, 203, 0.3);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            backdrop-filter: blur(10px);
+        }
+        
+        .ip-box:hover {
+            border-color: var(--accent);
+            transform: scale(1.01);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
+        }
+        
+        .ip-box h3 {
+            color: var(--accent);
+            margin: var(--spacing-xs) 0;
+            font-size: 1.5rem;
+            font-family: 'Jost', monospace;
+            font-weight: 600;
+            word-break: break-all;
+            padding: 0 1rem;
+        }
+        
+        .server-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            min-height: 1.5rem;
+        }
+        
+        /* ===== GALLERY ===== */
+        .gallery-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .gallery-item {
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            position: relative;
+            height: 280px;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            border: 1px solid rgba(106, 17, 203, 0.2);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 12px 25px rgba(0, 212, 255, 0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(5, 8, 17, 0.95), transparent);
+            padding: var(--spacing-md);
+            transform: translateY(100%);
+            transition: transform var(--transition-normal);
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        /* ===== FAQ ===== */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: var(--spacing-sm);
+            background: var(--gradient-glass);
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            border: 1px solid rgba(106, 17, 203, 0.2);
+            transition: all var(--transition-normal);
+        }
+        
+        .faq-item:hover {
+            border-color: rgba(106, 17, 203, 0.4);
+        }
+        
+        .faq-item.active {
+            border-color: var(--accent);
+        }
+        
+        .faq-question {
+            padding: var(--spacing-md);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--light);
+        }
+        
+        .faq-answer {
+            padding: 0 var(--spacing-md);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-normal), padding var(--transition-normal);
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 var(--spacing-md) var(--spacing-md);
+        }
+        
+        .faq-question i {
+            transition: transform var(--transition-normal);
+            color: var(--accent);
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        /* ===== FOOTER ===== */
+        footer {
+            background: rgba(5, 8, 17, 0.95);
+            padding: var(--spacing-xl) 5% var(--spacing-lg);
+            border-top: 1px solid rgba(106, 17, 203, 0.3);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .footer-logo {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: var(--spacing-md);
+            display: block;
+        }
+        
+        .footer-about p {
+            margin-bottom: var(--spacing-lg);
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .footer-links h4 {
+            color: var(--accent);
+            margin-bottom: var(--spacing-lg);
+            font-size: 1.1rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-links a i {
+            width: 20px;
+            color: var(--accent);
+            opacity: 0.7;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+        
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            text-decoration: none;
+            transition: all var(--transition-normal);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-social a:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        /* ===== ANIMAÇÕES MAIS RÁPIDAS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            opacity: 0;
+            animation: fadeInUp 0.3s ease forwards;
+        }
+        
+        .animate.delay-1 { animation-delay: 0.03s; }
+        .animate.delay-2 { animation-delay: 0.06s; }
+        .animate.delay-3 { animation-delay: 0.09s; }
+        .animate.delay-4 { animation-delay: 0.12s; }
+        .animate.delay-5 { animation-delay: 0.15s; }
+        
+        /* ===== RESPONSIVIDADE OTIMIZADA ===== */
+        /* Tablets (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .hero-logo {
+                max-width: 400px;
+            }
+            
+            .hero-subtitle {
+                max-width: 600px;
+            }
+            
+            .countdown-heading h1 {
+                min-width: 160px;
+                font-size: 1em;
+            }
+            
+            :root {
+                --spacing-xxl: 4rem;
+                --spacing-xl: 3rem;
+                --spacing-lg: 2rem;
+                --spacing-md: 1.25rem;
+            }
+        }
+        
+        /* Tablets menores (600px - 768px) */
+        @media (max-width: 900px) {
+            .nav-links {
+                gap: 1.2rem;
+            }
+            
+            .btn-discord {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.85rem;
+            }
+            
+            .current-language span:not(.lang-flag) {
+                display: none;
+            }
+            
+            .current-language {
+                padding: 0.6rem;
+            }
+            
+            .hero-logo {
+                max-width: 350px;
+            }
+            
+            .countdown-heading h1 {
+                min-width: 140px;
+                font-size: 0.9em;
+                margin: -1px 1em 0 1em;
+            }
+            
+            .info-card h3,
+            .roadmap-card h3,
+            .step h3 {
+                min-height: auto;
+            }
+        }
+        
+        /* Mobile (até 768px) - CORREÇÕES DA NAVBAR */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-center {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 85%;
+                height: 100vh;
+                background: rgba(10, 14, 23, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 90px 5% 0;
+                transition: right 0.3s ease;
+                box-shadow: -8px 0 30px rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(20px);
+                border-left: 1px solid rgba(106, 17, 203, 0.2);
+                z-index: 999;
+                transform: none;
+                left: auto;
+            }
+            
+            .nav-center.active {
+                right: 0;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                gap: 0;
+            }
+            
+            .nav-links a {
+                font-size: 1rem;
+                padding: 1rem 0;
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                letter-spacing: 1.2px;
+            }
+            
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+            
+            .gallery-item {
+                height: 250px;
+            }
+            
+            h1 {
+                font-size: clamp(2.3rem, 6vw, 3rem);
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+                padding: 0;
+            }
+            
+            .hero-logo {
+                max-width: 300px;
+            }
+            
+            .countdown {
+                height: 75px;
+            }
+            
+            .countdown .block .digits {
+                font-size: 1.8rem;
+            }
+            
+            .countdown-heading {
+                flex-wrap: wrap;
+            }
+            
+            .countdown-heading h1 {
+                order: 1;
+                width: 100%;
+                margin: 0.5rem 0;
+                min-width: auto;
+                height: auto;
+            }
+            
+            .countdown-heading .decoration.left {
+                order: 0;
+            }
+            
+            .countdown-heading .decoration.right {
+                order: 2;
+            }
+            
+            .roadmap-cards,
+            .info-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .server-info,
+            .how-to-play {
+                padding: var(--spacing-lg);
+            }
+            
+            .info-card,
+            .roadmap-card,
+            .step {
+                padding: var(--spacing-md);
+            }
+            
+            .roadmap-card {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+            
+            section {
+                padding: var(--spacing-lg) 5%;
+            }
+            
+            .section-header {
+                margin-bottom: var(--spacing-lg);
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+            
+            .server-selector {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .server-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            :root {
+                --spacing-xxl: 3rem;
+                --spacing-xl: 2.5rem;
+                --spacing-lg: 1.5rem;
+                --spacing-md: 1rem;
+            }
+        }
+        
+        /* Mobile pequeno (até 480px) */
+        @media (max-width: 480px) {
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+            
+            .nav-right {
+                gap: var(--spacing-sm);
+            }
+            
+            .btn-discord {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+            }
+            
+            #navbar {
+                padding: 0.8rem 5%;
+            }
+            
+            #navbar.scrolled {
+                padding: 0.6rem 5%;
+            }
+            
+            .hero-logo {
+                max-width: 250px;
+            }
+            
+            .countdown {
+                height: 65px;
+            }
+            
+            .countdown .block .digits {
+                font-size: 1.5rem;
+            }
+            
+            .countdown .block .label {
+                font-size: 0.6rem;
+            }
+            
+            .countdown-heading h1 {
+                font-size: 0.85em;
+                margin: 0.5rem 0.5em;
+            }
+            
+            .countdown-heading .decoration {
+                min-width: 15px;
+            }
+            
+            .countdown-heading .decoration.left {
+                margin-right: 5px;
+            }
+            
+            .countdown-heading .decoration.right {
+                margin-left: 5px;
+            }
+            
+            .ip-box h3 {
+                font-size: 1.3rem;
+                padding: 0 0.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+            
+            .copyright p {
+                font-size: 0.8rem;
+                line-height: 1.5;
+            }
+        }
+        
+        /* Mobile muito pequeno (até 360px) */
+        @media (max-width: 360px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            .hero-logo {
+                max-width: 200px;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .social-btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .countdown {
+                height: 60px;
+            }
+            
+            .countdown .block .digits {
+                font-size: 1.3rem;
+            }
+            
+            .countdown .block .label {
+                font-size: 0.55rem;
+            }
+            
+            .countdown-heading h1 {
+                font-size: 0.75em;
+                min-width: 120px;
+            }
+            
+            .info-card,
+            .roadmap-card,
+            .step {
+                padding: var(--spacing-sm);
+            }
+            
+            .ip-box {
+                padding: var(--spacing-md);
+            }
+            
+            .ip-box h3 {
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* ===== UTILITY CLASSES ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        .mb-sm { margin-bottom: var(--spacing-sm); }
+        .mb-md { margin-bottom: var(--spacing-md); }
+        .mb-lg { margin-bottom: var(--spacing-lg); }
+        .mb-xl { margin-bottom: var(--spacing-xl); }
+        .mb-xxl { margin-bottom: var(--spacing-xxl); }
+        
+        .mt-sm { margin-top: var(--spacing-sm); }
+        .mt-md { margin-top: var(--spacing-md); }
+        .mt-lg { margin-top: var(--spacing-lg); }
+        .mt-xl { margin-top: var(--spacing-xl); }
+        .mt-xxl { margin-top: var(--spacing-xxl); }
+    </style>
+</head>
+<body data-lang="pt">
+    <!-- Navbar - CORRIGIDA -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-center" id="navCenter">
+                <div class="nav-links" id="navLinks">
+                    <a href="#home" data-translate="navHome">Início</a>
+                    <a href="#about" data-translate="navAbout">Sobre</a>
+                    <a href="#roadmap" data-translate="navRoadmap">Planejamento</a>
+                    <a href="#how-to-play" data-translate="navHowToPlay">Como Jogar</a>
+                    <a href="#gallery" data-translate="navGallery">Galeria</a>
+                    <a href="#faq" data-translate="navFAQ">FAQ</a>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <div class="language-selector">
+                    <div class="current-language" id="languageToggle">
+                        <span class="lang-flag">🇧🇷</span>
+                        <span data-translate="currentLanguage">Português</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="language-dropdown" id="languageDropdown">
+                        <div class="language-option active" data-lang="pt">
+                            <span>🇧🇷</span>
+                            <span>Português</span>
+                        </div>
+                        <div class="language-option" data-lang="en">
+                            <span>🇺🇸</span>
+                            <span>English</span>
+                        </div>
+                        <div class="language-option" data-lang="es">
+                            <span>🇪🇸</span>
+                            <span>Español</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="https://discord.gg/Nm8wUsSaQG" class="btn-discord" target="_blank" data-translate="navDiscord">
+                    <i class="fab fa-discord"></i>
+                    Discord
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        
+        <img src="Fotos/logo.png" alt="VorteX Network Logo" class="hero-logo animate delay-1">
+        
+        <p class="hero-subtitle animate" data-translate="heroSubtitle">
+            Prepare-se para a aventura definitiva do Hytale! Nosso servidor global começa com gameplay vanilla puro e vai evoluir junto com você, sempre ouvindo o que a comunidade tem a dizer.
+        </p>
+
+        <div class="social-links">
+            <a href="https://twitter.com/VorteXHytale" class="social-btn btn-twitter animate delay-2" target="_blank">
+                <i class="fab fa-twitter"></i>
+                <span data-translate="followTwitter">Twitter</span>
+            </a>
+            <a href="https://discord.gg/Nm8wUsSaQG" class="social-btn btn-discord-hero animate delay-2" target="_blank">
+                <i class="fab fa-discord"></i>
+                <span data-translate="joinCommunity">Discord</span>
+            </a>
+            <a href="https://www.youtube.com/@VorteXNetwork-Hytale" class="social-btn btn-youtube animate delay-2" target="_blank">
+                <i class="fab fa-youtube"></i>
+                <span data-translate="watchYouTube">YouTube</span>
+            </a>
+        </div>
+        
+        <!-- Countdown -->
+        <div class="countdown-container animate delay-3">
+            <div class="countdown-heading">
+                <span class="decoration left"></span>
+                <h1 id="countdown-title"></h1>
+                <span class="decoration right"></span>
+            </div>
+            
+            <div class="countdown-wrapper">
+                <div class="countdown" id="countdown">
+                    <div class="block">
+                        <div class="digits" id="countdown-days">00</div>
+                        <div class="label" data-translate="daysLabel">Dias</div>
+                    </div>
+                    <div class="block">
+                        <div class="digits" id="countdown-hours">00</div>
+                        <div class="label" data-translate="hoursLabel">Horas</div>
+                    </div>
+                    <div class="block">
+                        <div class="digits" id="countdown-minutes">00</div>
+                        <div class="label" data-translate="minutesLabel">Minutos</div>
+                    </div>
+                    <div class="block">
+                        <div class="digits" id="countdown-seconds">00</div>
+                        <div class="label" data-translate="secondsLabel">Segundos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Server -->
+    <section id="about">
+        <div class="section-header">
+            <h2 class="animate" data-translate="aboutTitle">Nosso Servidor</h2>
+            <p class="section-subtitle animate delay-1" data-translate="aboutSubtitle">
+                Criado por jogadores experientes que sabem o que faz uma comunidade durar
+            </p>
+        </div>
+        
+        <div class="server-info">
+            <div class="info-grid">
+                <div class="info-card animate delay-1">
+                    <i class="fas fa-globe-americas"></i>
+                    <h3 data-translate="aboutCard1Title">Infraestrutura Dupla</h3>
+                    <p data-translate="aboutCard1Desc">
+                        Lançamento com servidores simultâneos no Brasil e EUA! Garantimos baixa latência para jogadores da América Latina e América do Norte desde o primeiro dia.
+                    </p>
+                </div>
+                
+                <div class="info-card animate delay-2">
+                    <i class="fas fa-gamepad"></i>
+                    <h3 data-translate="aboutCard2Title">Hytale Autêntico</h3>
+                    <p data-translate="aboutCard2Desc">
+                        Fiel ao espírito original: começamos vanilla puro e só adicionamos o que a comunidade aprovar. Sem mudanças radicais sem o consenso de todos.
+                    </p>
+                </div>
+                
+                <div class="info-card animate delay-3">
+                    <i class="fas fa-rocket"></i>
+                    <h3 data-translate="aboutCard3Title">Evolução Constante</h3>
+                    <p data-translate="aboutCard3Desc">
+                        Nosso servidor cresce com vocês! Eventos sazonais, atualizações baseadas no feedback e novidades para manter tudo sempre fresco e envolvente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section id="roadmap">
+        <div class="section-header">
+            <h2 class="animate" data-translate="roadmapTitle">Plano de Desenvolvimento</h2>
+            <p class="section-subtitle animate delay-1" data-translate="roadmapSubtitle">
+                Do vanilla puro até um servidor global completo - tudo planejado
+            </p>
+        </div>
+        
+        <div class="roadmap-cards">
+            <div class="roadmap-card animate delay-1">
+                <div class="roadmap-number">1</div>
+                <h3 data-translate="roadCard1Title">Lançamento Inicial</h3>
+                <p><strong data-translate="roadCard1Desc">Vanilla Puro</strong></p>
+                <ul>
+                    <li data-translate="roadCard1Point1">Hytale exatamente como os desenvolvedores planejaram</li>
+                    <li data-translate="roadCard1Point2">Suporte para PT, EN e ES desde o primeiro dia</li>
+                    <li data-translate="roadCard1Point3">Sistema básico de economia e trocas entre jogadores</li>
+                    <li data-translate="roadCard1Point4">Servidores simultâneos no Brasil e Estados Unidos</li>
+                </ul>
+            </div>
+            
+            <div class="roadmap-card animate delay-2">
+                <div class="roadmap-number">2</div>
+                <h3 data-translate="roadCard2Title">Otimização</h3>
+                <p><strong data-translate="roadCard2Desc">Melhorias da Comunidade</strong></p>
+                <ul>
+                    <li data-translate="roadCard2Point1">Ajustes de balanceamento baseados no feedback</li>
+                    <li data-translate="roadCard2Point2">Sistema avançado de proteção de construções</li>
+                    <li data-translate="roadCard2Point3">Expansão para América Latina</li>
+                    <li data-translate="roadCard2Point4">Anti-cheat e ferramentas de moderação melhoradas</li>
+                </ul>
+            </div>
+            
+            <div class="roadmap-card animate delay-3">
+                <div class="roadmap-number">3</div>
+                <h3 data-translate="roadCard3Title">Expansão</h3>
+                <p><strong data-translate="roadCard3Desc">Conteúdo Exclusivo</strong></p>
+                <ul>
+                    <li data-translate="roadCard3Point1">Minigames exclusivos e eventos especiais</li>
+                    <li data-translate="roadCard3Point2">Torneios semanais com premiações</li>
+                    <li data-translate="roadCard3Point3">Sistema completo de clãs e guildas</li>
+                    <li data-translate="roadCard3Point4">Servidores na Europa e Ásia</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Play - COM DOIS SERVIDORES -->
+    <section id="how-to-play" class="how-to-play">
+        <div class="section-header">
+            <h2 class="animate" data-translate="howtoTitle">Como Jogar</h2>
+            <p class="section-subtitle animate delay-1" data-translate="howtoSubtitle">
+                Junte-se à nossa comunidade e comece sua aventura no Hytale
+            </p>
+        </div>
+        
+        <div class="steps">
+            <div class="step animate delay-1">
+                <div class="step-number">1</div>
+                <h3 data-translate="step1Title">Obtenha o Hytale</h3>
+                <p data-translate="step1Desc">
+                    Adquira o Hytale através dos canais oficiais e instale o jogo. Verifique se seu sistema atende aos requisitos recomendados para melhor performance.
+                </p>
+            </div>
+            
+            <div class="step animate delay-2">
+                <div class="step-number">2</div>
+                <h3 data-translate="step2Title">Conecte ao Servidor</h3>
+                <p data-translate="step2Desc">
+                    No menu multiplayer, adicione nosso IP aos seus favoritos. Salve para acesso rápido e chame seus amigos para jogarem juntos!
+                </p>
+            </div>
+            
+            <div class="step animate delay-3">
+                <div class="step-number">3</div>
+                <h3 data-translate="step3Title">Comece Sua Jornada</h3>
+                <p data-translate="step3Desc">
+                    Entre no servidor e inicie sua aventura! Junte-se ao nosso Discord para dicas, eventos e encontrar outros jogadores.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Seção de IPs com dois servidores -->
+        <div class="ip-section animate delay-4">
+            <div class="server-selector">
+                <button class="server-btn active" data-server="vortex-network" data-translate="server1Btn">
+                    VorteX Network
+                </button>
+                <button class="server-btn" data-server="rede-vortex" data-translate="server2Btn">
+                    Rede VorteX
+                </button>
+            </div>
+            
+            <div class="ip-box" id="ip-box" onclick="copyIP()">
+                <p style="color: var(--gray); margin-bottom: 0.5rem;" data-translate="serverIPLabel">Endereço do Servidor</p>
+                <h3 id="ip-text">199.115.79.83:1025</h3>
+                <p class="server-description" id="server-description" data-translate="server1Desc">
+                    Servidor principal com melhor performance para jogadores globais
+                </p>
+                <p style="color: var(--gray); font-size: 0.9rem; margin-top: 0.5rem;">
+                    <i class="fas fa-copy"></i> <span data-translate="copyIP">Clique para copiar</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+        <div class="section-header">
+            <h2 class="animate" data-translate="galleryTitle">Mundo do Hytale</h2>
+            <p class="section-subtitle animate delay-1" data-translate="gallerySubtitle">
+                Veja um pouco do que te espera no nosso servidor
+            </p>
+        </div>
+        
+        <div class="gallery-container">
+            <div class="gallery-grid">
+                <div class="gallery-item animate delay-1">
+                    <img src="https://cdn.hytale.com/5e7b9ea050cbcd001176c5af_2___graphics_update_example_3.jpg" alt="Hytale Beautiful World">
+                    <div class="gallery-overlay">
+                        <h4 data-translate="gallery1Title">Mundos Deslumbrantes</h4>
+                        <p data-translate="gallery1Desc">Explore paisagens impressionantes e biomas variados</p>
+                    </div>
+                </div>
+                <div class="gallery-item animate delay-2">
+                    <img src="https://cdn.hytale.com/5e7b9eb050cbcd001176c5b7_6___watering_corn.png" alt="Hytale Farming System">
+                    <div class="gallery-overlay">
+                        <h4 data-translate="gallery2Title">Sistemas de Jogo Profundos</h4>
+                        <p data-translate="gallery2Desc">Engaje-se com agricultura, criação e mecânicas de sobrevivência</p>
+                    </div>
+                </div>
+                <div class="gallery-item animate delay-3">
+                    <img src="https://cdn.hytale.com/5e7b9eb650cbcd001176c5bb_8___fleeing_from_scaraks.png" alt="Hytale Epic Adventures">
+                    <div class="gallery-overlay">
+                        <h4 data-translate="gallery3Title">Aventuras Épicas</h4>
+                        <p data-translate="gallery3Desc">Enfrente criaturas desafiadoras e descubra tesouros escondidos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="section-header">
+            <h2 class="animate" data-translate="faqTitle">Perguntas Frequentes</h2>
+            <p class="section-subtitle animate delay-1" data-translate="faqSubtitle">
+                Tudo que você precisa saber sobre a VorteX Network
+            </p>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item animate delay-1">
+                <div class="faq-question">
+                    <span data-translate="faq1Q">Quando o servidor será lançado?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-translate="faq1A">
+                        Lançaremos simultaneamente com o Hytale oficial! Estamos em fase final de preparação para garantir uma experiência perfeita desde o primeiro dia.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="faq-item animate delay-2">
+                <div class="faq-question">
+                    <span data-translate="faq2Q">Há algum custo para jogar?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-translate="faq2A">
+                        Completamente gratuito! Ofereceremos itens cosméticos opcionais e benefícios para apoiadores que ajudarão a manter nossa infraestrutura premium.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="faq-item animate delay-3">
+                <div class="faq-question">
+                    <span data-translate="faq3Q">Quais regiões serão atendidas?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-translate="faq3A">
+                        Começaremos com servidores simultâneos no Brasil e Estados Unidos! Garantimos baixa latência para jogadores da América Latina e América do Norte.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="faq-item animate delay-4">
+                <div class="faq-question">
+                    <span data-translate="faq4Q">Haverá suporte a mods e plugins?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-translate="faq4A">
+                        Iniciaremos com vanilla puro para manter a experiência autêntica. Com o feedback da comunidade, adicionaremos mods e plugins cuidadosamente selecionados.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="faq-item animate delay-5">
+                <div class="faq-question">
+                    <span data-translate="faq5Q">Posso contribuir com o desenvolvimento?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p data-translate="faq5A">
+                        Junte-se ao nosso Discord! Buscamos ativamente feedback, realizamos testes beta e discutimos novas funcionalidades. A comunidade molda nosso desenvolvimento.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <span class="footer-logo">VorteX Network</span>
+                    <p data-translate="footerAbout">
+                        Um servidor premium de Hytale criado por jogadores para jogadores. Construímos essa comunidade juntos desde o primeiro dia, com servidores simultâneos no Brasil e EUA.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://twitter.com/VorteXHytale" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://discord.gg/Nm8wUsSaQG" target="_blank"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.youtube.com/@VorteXNetwork-Hytale" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 data-translate="footerLinks1">Navegação</h4>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> <span data-translate="navHome">Início</span></a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> <span data-translate="navAbout">Sobre</span></a></li>
+                        <li><a href="#roadmap"><i class="fas fa-chevron-right"></i> <span data-translate="navRoadmap">Planejamento</span></a></li>
+                        <li><a href="#how-to-play"><i class="fas fa-chevron-right"></i> <span data-translate="navHowToPlay">Como Jogar</span></a></li>
+                        <li><a href="#faq"><i class="fas fa-chevron-right"></i> <span data-translate="navFAQ">FAQ</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 data-translate="footerLinks2">Links Úteis</h4>
+                    <ul>
+                        <li><a href="https://hytale.com" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-translate="officialSite">Site Oficial do Hytale</span></a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> <span data-translate="serverRules">Regras do Servidor</span></a></li>
+                        <li><a href="#"><i class="fas fa-server"></i> <span data-translate="serverStatus">Status do Servidor</span></a></li>
+                        <li><a href="https://discord.gg/Nm8wUsSaQG" target="_blank"><i class="fas fa-headset"></i> <span data-translate="support">Suporte</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p data-translate="copyright">© 2026 VorteX Network. Todos os direitos reservados.</p>
+                <p data-translate="notAffiliated">Este servidor não é afiliado ou endossado pela Hypixel Studios ou equipe de desenvolvimento do Hytale.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== SISTEMA DE TRADUÇÃO =====
+        const translations = {
+            pt: {
+                // Navbar
+                navHome: "Início",
+                navAbout: "Sobre",
+                navRoadmap: "Planejamento",
+                navHowToPlay: "Como Jogar",
+                navGallery: "Galeria",
+                navFAQ: "FAQ",
+                navDiscord: "Discord",
+                currentLanguage: "Português",
+                
+                // Hero
+                heroSubtitle: "Prepare-se para a aventura definitiva do Hytale! Nosso servidor global começa com gameplay vanilla puro e vai evoluir junto com você, sempre ouvindo o que a comunidade tem a dizer.",
+                daysLabel: "Dias",
+                hoursLabel: "Horas",
+                minutesLabel: "Minutos",
+                secondsLabel: "Segundos",
+                followTwitter: "Twitter",
+                joinCommunity: "Discord",
+                watchYouTube: "YouTube",
+                
+                // About
+                aboutTitle: "Nosso Servidor",
+                aboutSubtitle: "Criado por jogadores experientes que sabem o que faz uma comunidade durar",
+                aboutCard1Title: "Infraestrutura Dupla",
+                aboutCard1Desc: "Lançamento com servidores simultâneos no Brasil e EUA! Garantimos baixa latência para jogadores da América Latina e América do Norte desde o primeiro dia.",
+                aboutCard2Title: "Hytale Autêntico",
+                aboutCard2Desc: "Fiel ao espírito original: começamos vanilla puro e só adicionamos o que a comunidade aprovar. Sem mudanças radicais sem o consenso de todos.",
+                aboutCard3Title: "Evolução Constante",
+                aboutCard3Desc: "Nosso servidor cresce com vocês! Eventos sazonais, atualizações baseadas no feedback e novidades para manter tudo sempre fresco e envolvente.",
+                
+                // Roadmap
+                roadmapTitle: "Plano de Desenvolvimento",
+                roadmapSubtitle: "Do vanilla puro até um servidor global completo - tudo planejado",
+                roadCard1Title: "Lançamento Inicial",
+                roadCard1Desc: "Vanilla Puro",
+                roadCard1Point1: "Hytale exatamente como os desenvolvedores planejaram",
+                roadCard1Point2: "Suporte para PT, EN e ES desde o primeiro dia",
+                roadCard1Point3: "Sistema básico de economia e trocas entre jogadores",
+                roadCard1Point4: "Servidores simultâneos no Brasil e Estados Unidos",
+                roadCard2Title: "Otimização",
+                roadCard2Desc: "Melhorias da Comunidade",
+                roadCard2Point1: "Ajustes de balanceamento baseados no feedback",
+                roadCard2Point2: "Sistema avançado de proteção de construções",
+                roadCard2Point3: "Expansão para América Latina",
+                roadCard2Point4: "Anti-cheat e ferramentas de moderação melhoradas",
+                roadCard3Title: "Expansão",
+                roadCard3Desc: "Conteúdo Exclusivo",
+                roadCard3Point1: "Minigames exclusivos e eventos especiais",
+                roadCard3Point2: "Torneios semanais com premiações",
+                roadCard3Point3: "Sistema completo de clãs e guildas",
+                roadCard3Point4: "Servidores na Europa e Ásia",
+                
+                // How to Play
+                howtoTitle: "Como Jogar",
+                howtoSubtitle: "Junte-se à nossa comunidade e comece sua aventura no Hytale",
+                step1Title: "Obtenha o Hytale",
+                step1Desc: "Adquira o Hytale através dos canais oficiais e instale o jogo. Verifique se seu sistema atende aos requisitos recomendados para melhor performance.",
+                step2Title: "Conecte ao Servidor",
+                step2Desc: "No menu multiplayer, adicione nosso IP aos seus favoritos. Salve para acesso rápido e chame seus amigos para jogarem juntos!",
+                step3Title: "Comece Sua Jornada",
+                step3Desc: "Entre no servidor e inicie sua aventura! Junte-se ao nosso Discord para dicas, eventos e encontrar outros jogadores.",
+                
+                // Servidores
+                serverIPLabel: "Endereço do Servidor",
+                server1Btn: "VorteX Network",
+                server2Btn: "Rede VorteX",
+                server1Desc: "Servidor principal com melhor performance para jogadores globais",
+                server2Desc: "Servidor alternativo com latência otimizada para América do Sul",
+                copyIP: "Clique para copiar",
+                ipCopied: "Endereço Copiado!",
+                
+                // Gallery
+                galleryTitle: "Mundo do Hytale",
+                gallerySubtitle: "Veja um pouco do que te espera no nosso servidor",
+                gallery1Title: "Mundos Deslumbrantes",
+                gallery1Desc: "Explore paisagens impressionantes e biomas variados",
+                gallery2Title: "Sistemas de Jogo Profundos",
+                gallery2Desc: "Engaje-se com agricultura, criação e mecânicas de sobrevivência",
+                gallery3Title: "Aventuras Épicas",
+                gallery3Desc: "Enfrente criaturas desafiadoras e descubra tesouros escondidos",
+                
+                // FAQ
+                faqTitle: "Perguntas Frequentes",
+                faqSubtitle: "Tudo que você precisa saber sobre a VorteX Network",
+                faq1Q: "Quando o servidor será lançado?",
+                faq1A: "Lançaremos simultaneamente com o Hytale oficial! Estamos em fase final de preparação para garantir uma experiência perfeita desde o primeiro dia.",
+                faq2Q: "Há algum custo para jogar?",
+                faq2A: "Completamente gratuito! Ofereceremos itens cosméticos opcionais e benefícios para apoiadores que ajudarão a manter nossa infraestrutura premium.",
+                faq3Q: "Quais regiões serão atendidas?",
+                faq3A: "Começaremos com servidores simultâneos no Brasil e Estados Unidos! Garantimos baixa latencia para jogadores da América Latina e América do Norte.",
+                faq4Q: "Haverá suporte a mods e plugins?",
+                faq4A: "Iniciaremos com vanilla puro para manter a experiência autêntica. Com o feedback da comunidade, adicionaremos mods e plugins cuidadosamente selecionados.",
+                faq5Q: "Posso contribuir com o desenvolvimento?",
+                faq5A: "Junte-se ao nosso Discord! Buscamos ativamente feedback, realizamos testes beta e discutimos novas funcionalidades. A comunidade molda nosso desenvolvimento.",
+                
+                // Footer
+                footerAbout: "Um servidor premium de Hytale criado por jogadores para jogadores. Construímos essa comunidade juntos desde o primeiro dia, com servidores simultâneos no Brasil e EUA.",
+                footerLinks1: "Navegação",
+                footerLinks2: "Links Úteis",
+                officialSite: "Site Oficial do Hytale",
+                serverRules: "Regras do Servidor",
+                serverStatus: "Status do Servidor",
+                support: "Suporte",
+                copyright: "© 2026 VorteX Network. Todos os direitos reservados.",
+                notAffiliated: "Este servidor não é afiliado ou endossado pela Hypixel Studios ou equipe de desenvolvimento do Hytale."
+            },
+            en: {
+                // Navbar
+                navHome: "Home",
+                navAbout: "About",
+                navRoadmap: "Roadmap",
+                navHowToPlay: "How to Play",
+                navGallery: "Gallery",
+                navFAQ: "FAQ",
+                navDiscord: "Discord",
+                currentLanguage: "English",
+                
+                // Hero
+                heroSubtitle: "Get ready for the ultimate Hytale adventure! Our global server starts with pure vanilla gameplay and evolves with you, always listening to community feedback.",
+                daysLabel: "Days",
+                hoursLabel: "Hours",
+                minutesLabel: "Minutes",
+                secondsLabel: "Seconds",
+                followTwitter: "Twitter",
+                joinCommunity: "Discord",
+                watchYouTube: "YouTube",
+                
+                // About
+                aboutTitle: "Our Server",
+                aboutSubtitle: "Created by experienced players who know what makes a community last",
+                aboutCard1Title: "Dual Infrastructure",
+                aboutCard1Desc: "Launch with simultaneous servers in Brazil and USA! We guarantee low latency for players in Latin America and North America from day one.",
+                aboutCard2Title: "Authentic Hytale",
+                aboutCard2Desc: "True to the original spirit: we start pure vanilla and only add what the community approves. No radical changes without consensus.",
+                aboutCard3Title: "Constant Evolution",
+                aboutCard3Desc: "Our server grows with you! Seasonal events, feedback-based updates, and new features to keep everything fresh and engaging.",
+                
+                // Roadmap
+                roadmapTitle: "Development Plan",
+                roadmapSubtitle: "From pure vanilla to a complete global server - all planned out",
+                roadCard1Title: "Initial Launch",
+                roadCard1Desc: "Pure Vanilla",
+                roadCard1Point1: "Hytale exactly as the developers intended",
+                roadCard1Point2: "Support for PT, EN and ES from day one",
+                roadCard1Point3: "Basic economy and player trading system",
+                roadCard1Point4: "Simultaneous servers in Brazil and United States",
+                roadCard2Title: "Optimization",
+                roadCard2Desc: "Community Improvements",
+                roadCard2Point1: "Balance adjustments based on feedback",
+                roadCard2Point2: "Advanced building protection system",
+                roadCard2Point3: "Expansion to Latin America",
+                roadCard2Point4: "Enhanced anti-cheat and moderation tools",
+                roadCard3Title: "Expansion",
+                roadCard3Desc: "Exclusive Content",
+                roadCard3Point1: "Exclusive minigames and special events",
+                roadCard3Point2: "Weekly tournaments with prizes",
+                roadCard3Point3: "Complete clan and guild system",
+                roadCard3Point4: "Servers in Europe and Asia",
+                
+                // How to Play
+                howtoTitle: "How to Play",
+                howtoSubtitle: "Join our community and start your Hytale adventure",
+                step1Title: "Get Hytale",
+                step1Desc: "Get Hytale through official channels and install the game. Make sure your system meets recommended requirements for optimal performance.",
+                step2Title: "Connect to Server",
+                step2Desc: "In the multiplayer menu, add our IP to your favorites. Save it for quick access and invite your friends to play together!",
+                step3Title: "Start Your Journey",
+                step3Desc: "Join the server and begin your adventure! Join our Discord for tips, events and to meet other players.",
+                
+                // Servers
+                serverIPLabel: "Server Address",
+                server1Btn: "VorteX Network",
+                server2Btn: "VorteX Network (Alt)",
+                server1Desc: "Main server with best performance for global players",
+                server2Desc: "Alternative server with optimized latency for South America",
+                copyIP: "Click to copy",
+                ipCopied: "Address Copied!",
+                
+                // Gallery
+                galleryTitle: "Hytale World",
+                gallerySubtitle: "See what awaits you on our server",
+                gallery1Title: "Stunning Worlds",
+                gallery1Desc: "Explore impressive landscapes and varied biomes",
+                gallery2Title: "Deep Game Systems",
+                gallery2Desc: "Engage with farming, crafting and survival mechanics",
+                gallery3Title: "Epic Adventures",
+                gallery3Desc: "Face challenging creatures and discover hidden treasures",
+                
+                // FAQ
+                faqTitle: "Frequently Asked Questions",
+                faqSubtitle: "Everything you need to know about VorteX Network",
+                faq1Q: "When will the server launch?",
+                faq1A: "We'll launch simultaneously with official Hytale! We're in final preparation to ensure a perfect experience from day one.",
+                faq2Q: "Is there any cost to play?",
+                faq2A: "Completely free! We'll offer optional cosmetic items and supporter benefits that help maintain our premium infrastructure.",
+                faq3Q: "Which regions will be served?",
+                faq3A: "We'll start with simultaneous servers in Brazil and United States! We guarantee low latency for players in Latin America and North America.",
+                faq4Q: "Will there be mod and plugin support?",
+                faq4A: "We'll start with pure vanilla to maintain the authentic experience. With community feedback, we'll add carefully selected mods and plugins.",
+                faq5Q: "Can I contribute to development?",
+                faq5A: "Join our Discord! We actively seek feedback, conduct beta tests, and discuss new features. The community shapes our development.",
+                
+                // Footer
+                footerAbout: "A premium Hytale server created by players for players. We build this community together from day one, with simultaneous servers in Brazil and USA.",
+                footerLinks1: "Navigation",
+                footerLinks2: "Useful Links",
+                officialSite: "Official Hytale Website",
+                serverRules: "Server Rules",
+                serverStatus: "Server Status",
+                support: "Support",
+                copyright: "© 2026 VorteX Network. All rights reserved.",
+                notAffiliated: "This server is not affiliated with or endorsed by Hypixel Studios or the Hytale development team."
+            },
+            es: {
+                // Navbar
+                navHome: "Inicio",
+                navAbout: "Sobre",
+                navRoadmap: "Plan",
+                navHowToPlay: "Cómo Jugar",
+                navGallery: "Galería",
+                navFAQ: "FAQ",
+                navDiscord: "Discord",
+                currentLanguage: "Español",
+                
+                // Hero
+                heroSubtitle: "¡Prepárate para la aventura definitiva de Hytale! Nuestro servidor global comienza con jugabilidad vanilla puro y evoluciona contigo, siempre escuchando los comentarios de la comunidad.",
+                daysLabel: "Días",
+                hoursLabel: "Horas",
+                minutesLabel: "Minutos",
+                secondsLabel: "Segundos",
+                followTwitter: "Twitter",
+                joinCommunity: "Discord",
+                watchYouTube: "YouTube",
+                
+                // About
+                aboutTitle: "Nuestro Servidor",
+                aboutSubtitle: "Creado por jugadores experimentados que saben lo que hace durar a una comunidad",
+                aboutCard1Title: "Infraestructura Dual",
+                aboutCard1Desc: "¡Lanzamiento con servidores simultáneos en Brasil y EE.UU.! Garantizamos baja latencia para jugadores de América Latina y Norteamérica desde el primer día.",
+                aboutCard2Title: "Hytale Auténtico",
+                aboutCard2Desc: "Fiel al espíritu original: comenzamos vanilla puro y solo agregamos lo que la comunidad aprueba. Sin cambios radicales sin consenso.",
+                aboutCard3Title: "Evolución Constante",
+                aboutCard3Desc: "¡Nuestro servidor crece contigo! Eventos estacionales, actualizaciones basadas en comentarios y nuevas funciones para mantener todo fresco y envolvente.",
+                
+                // Roadmap
+                roadmapTitle: "Plan de Desarrollo",
+                roadmapSubtitle: "De vanilla puro a un servidor global completo - todo planificado",
+                roadCard1Title: "Lanzamiento Inicial",
+                roadCard1Desc: "Vanilla Puro",
+                roadCard1Point1: "Hytale exactamente como lo planearon los desarrolladores",
+                roadCard1Point2: "Soporte para PT, EN y ES desde el primer día",
+                roadCard1Point3: "Sistema básico de economía e intercambios entre jugadores",
+                roadCard1Point4: "Servidores simultáneos en Brasil y Estados Unidos",
+                roadCard2Title: "Optimización",
+                roadCard2Desc: "Mejoras de la Comunidad",
+                roadCard2Point1: "Ajustes de equilibrio basados en comentarios",
+                roadCard2Point2: "Sistema avanzado de protección de construcciones",
+                roadCard2Point3: "Expansión a América Latina",
+                roadCard2Point4: "Anti-cheat y herramientas de moderación mejoradas",
+                roadCard3Title: "Expansión",
+                roadCard3Desc: "Contenido Exclusivo",
+                roadCard3Point1: "Minijuegos exclusivos y eventos especiales",
+                roadCard3Point2: "Torneos semanales con premios",
+                roadCard3Point3: "Sistema completo de clanes y gremios",
+                roadCard3Point4: "Servidores en Europa y Asia",
+                
+                // How to Play
+                howtoTitle: "Cómo Jugar",
+                howtoSubtitle: "Únete a nuestra comunidad y comienza tu aventura en Hytale",
+                step1Title: "Obtén Hytale",
+                step1Desc: "Consigue Hytale a través de canales oficiales e instala el juego. Asegúrate de que tu sistema cumpla con los requisitos recomendados para mejor rendimiento.",
+                step2Title: "Conéctate al Servidor",
+                step2Desc: "En el menú multijugador, agrega nuestra IP a tus favoritos. ¡Guárdala para acceso rápido e invita a tus amigos a jugar juntos!",
+                step3Title: "Comienza tu Viaje",
+                step3Desc: "¡Únete al servidor y comienza tu aventura! Únete a nuestro Discord para consejos, eventos y conocer otros jugadores.",
+                
+                // Servers
+                serverIPLabel: "Dirección del Servidor",
+                server1Btn: "VorteX Network",
+                server2Btn: "Red VorteX",
+                server1Desc: "Servidor principal con mejor rendimiento para jugadores globales",
+                server2Desc: "Servidor alternativo con latencia optimizada para Sudamérica",
+                copyIP: "Haz clic para copiar",
+                ipCopied: "¡Dirección Copiada!",
+                
+                // Gallery
+                galleryTitle: "Mundo de Hytale",
+                gallerySubtitle: "Mira lo que te espera en nuestro servidor",
+                gallery1Title: "Mundos Deslumbrantes",
+                gallery1Desc: "Explora paisajes impresionantes y biomas variados",
+                gallery2Title: "Sistemas de Juego Profundos",
+                gallery2Desc: "Involúcrate con agricultura, elaboración y mecánicas de supervivencia",
+                gallery3Title: "Aventuras Épicas",
+                gallery3Desc: "Enfrenta criaturas desafiantes y descubre tesoros ocultos",
+                
+                // FAQ
+                faqTitle: "Preguntas Frecuentes",
+                faqSubtitle: "Todo lo que necesitas saber sobre VorteX Network",
+                faq1Q: "¿Cuándo se lanzará el servidor?",
+                faq1A: "¡Lanzaremos simultáneamente con Hytale oficial! Estamos en preparación final para garantizar una experiencia perfecta desde el primer día.",
+                faq2Q: "¿Hay algún costo para jugar?",
+                faq2A: "¡Completamente gratis! Ofreceremos elementos cosméticos opcionales y beneficios para seguidores que ayudarán a mantener nuestra infraestructura premium.",
+                faq3Q: "¿Qué regiones serán atendidas?",
+                faq3A: "¡Comenzaremos con servidores simultáneos en Brasil y Estados Unidos! Garantizamos baja latencia para jugadores de América Latina y Norteamérica.",
+                faq4Q: "¿Habrá soporte para mods y plugins?",
+                faq4A: "Comenzaremos con vanilla puro para mantener la experiencia auténtica. Con los comentarios de la comunidad, agregaremos mods y plugins cuidadosamente seleccionados.",
+                faq5Q: "¿Puedo contribuir al desarrollo?",
+                faq5A: "¡Únete a nuestro Discord! Buscamos activamente comentarios, realizamos pruebas beta y discutimos nuevas funciones. La comunidad moldea nuestro desarrollo.",
+                
+                // Footer
+                footerAbout: "Un servidor premium de Hytale creado por jugadores para jugadores. Construimos esta comunidad juntos desde el primer día, con servidores simultáneos en Brasil y EE.UU.",
+                footerLinks1: "Navegación",
+                footerLinks2: "Enlaces Útiles",
+                officialSite: "Sitio Oficial de Hytale",
+                serverRules: "Reglas del Servidor",
+                serverStatus: "Estado del Servidor",
+                support: "Soporte",
+                copyright: "© 2026 VorteX Network. Todos los derechos reservados.",
+                notAffiliated: "Este servidor no está afiliado ni respaldado por Hypixel Studios o equipo de desarrollo de Hytale."
+            }
+        };
+
+        // ===== MENSAGENS DO COUNTDOWN (traduzidas) =====
+        const countdownMessages = {
+            pt: [
+                "FALTA POUCO!",
+                "A HYPE É REAL",
+                "NÃO AGUENTO MAIS",
+                "EM BREVE™",
+                "QUASE LÁ",
+                "FIQUE ATENTO",
+                "CONTANDO OS DIAS",
+                "NÍVEL DE EXPECTATIVA: 100",
+                "PREPARE-SE",
+                "A ESPERA ESTÁ QUASE NO FIM",
+                "AVENTURA À VISTA",
+                "QUE A CONTAGEM REGRESSIVA COMECE",
+                "PREPARE SEUS MUNDOS",
+                "A JORNADA COMEÇA",
+                "EQUIPE-SE",
+                "SEGUREM-SE",
+                "O FUTURO ESTÁ PRÓXIMO",
+                "TANTO PARA EXPLORAR",
+                "O MELHOR AINDA ESTÁ POR VIR",
+                "PRONTO PARA AÇÃO"
+            ],
+            en: [
+                "HERE WE GO BOIS",
+                "HYPE IS REAL",
+                "CAN'T WAIT ANYMORE",
+                "SOON™",
+                "ALMOST THERE",
+                "STAY TUNED",
+                "COUNTING THE DAYS",
+                "EXCITEMENT LEVEL: 100",
+                "GET READY",
+                "THE WAIT IS ALMOST OVER",
+                "ADVENTURE AWAITS",
+                "LET THE COUNTDOWN BEGIN",
+                "PREPARE YOUR WORLDS",
+                "THE JOURNEY BEGINS",
+                "GEAR UP",
+                "BRACE YOURSELVES",
+                "THE FUTURE IS NEAR",
+                "SO MUCH TO EXPLORE",
+                "THE BEST IS YET TO COME",
+                "READY FOR ACTION"
+            ],
+            es: [
+                "¡FALTA POCO!",
+                "LA EXPECTATIVA ES REAL",
+                "NO AGUANTO MÁS",
+                "PRONTO™",
+                "CASI ALLÍ",
+                "PERMANEZCAN ATENTOS",
+                "CONTANDO LOS DÍAS",
+                "NIVEL DE EMOCIÓN: 100",
+                "PREPÁRENSE",
+                "LA ESPERA ESTÁ CASI TERMINADA",
+                "LA AVENTURA ESPERA",
+                "QUE COMIENCE LA CUENTA REGRESIVA",
+                "PREPAREN SUS MUNDOS",
+                "COMIENZA EL VIAJE",
+                "EQUÍPENSE",
+                "AFÉRRENSE",
+                "EL FUTURO ESTÁ CERCA",
+                "TANTO POR EXPLORAR",
+                "LO MEJOR ESTÁ POR VENIR",
+                "LISTO PARA LA ACCIÓN"
+            ]
+        };
+
+        // ===== SISTEMA DE TRADUÇÃO =====
+        function updateTranslations(lang) {
+            const t = translations[lang];
+            if (!t) return;
+            
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (t[key]) {
+                    if (element.children.length > 0) {
+                        const childSpan = element.querySelector('span');
+                        if (childSpan && !childSpan.hasAttribute('data-translate')) {
+                            childSpan.textContent = t[key];
+                        } else {
+                            element.textContent = t[key];
+                        }
+                    } else {
+                        element.textContent = t[key];
+                    }
+                }
+            });
+            
+            const currentLangEl = document.querySelector('.current-language');
+            const flag = lang === 'en' ? '🇺🇸' : lang === 'pt' ? '🇧🇷' : '🇪🇸';
+            const langName = lang === 'en' ? 'English' : lang === 'pt' ? 'Português' : 'Español';
+            
+            currentLangEl.innerHTML = `<span class="lang-flag">${flag}</span><span>${langName}</span><i class="fas fa-chevron-down"></i>`;
+            
+            // Atualizar mensagens do countdown
+            updateCountdownTitle(lang);
+            
+            // Atualizar descrição do servidor ativo
+            updateServerDescription();
+        }
+
+        // ===== EFEITO DE SCRAMBLE NO COUNTDOWN =====
+        function scrambleText(element, newText, duration = 600) {
+            const chars = '!<>-_\\/[]{}—=+*^?#________';
+            const originalText = element.textContent;
+            const length = Math.max(originalText.length, newText.length);
+            let frame = 0;
+            const totalFrames = Math.ceil(duration / 30);
+            
+            element.style.minWidth = element.offsetWidth + 'px';
+            
+            const interval = setInterval(() => {
+                let displayText = '';
+                for (let i = 0; i < length; i++) {
+                    if (i < (frame / totalFrames) * length) {
+                        displayText += newText[i] || '';
+                    } else {
+                        displayText += chars[Math.floor(Math.random() * chars.length)];
+                    }
+                }
+                element.textContent = displayText;
+                frame++;
+                if (frame > totalFrames) {
+                    clearInterval(interval);
+                    element.textContent = newText;
+                    element.style.minWidth = '';
+                }
+            }, 30);
+        }
+
+        // ===== ATUALIZAR TÍTULO DO COUNTDOWN =====
+        let currentTitleIndex = 0;
+        let titleInterval;
+
+        function updateCountdownTitle(lang) {
+            const countdownTitleElement = document.getElementById('countdown-title');
+            const messages = countdownMessages[lang] || countdownMessages['en'];
+            
+            // Limpar intervalo anterior
+            if (titleInterval) {
+                clearInterval(titleInterval);
+            }
+            
+            // Selecionar título inicial aleatório
+            currentTitleIndex = Math.floor(Math.random() * messages.length);
+            countdownTitleElement.textContent = messages[currentTitleIndex];
+            
+            // Configurar intervalo para mudar títulos
+            titleInterval = setInterval(() => {
+                let newIndex;
+                do {
+                    newIndex = Math.floor(Math.random() * messages.length);
+                } while (newIndex === currentTitleIndex);
+                
+                currentTitleIndex = newIndex;
+                scrambleText(countdownTitleElement, messages[currentTitleIndex], 600);
+            }, 10000); // 10 segundos
+        }
+
+        // ===== SISTEMA DE SERVIDORES =====
+        const servers = {
+            'vortex-network': {
+                ip: '199.115.79.83:1025',
+                descriptionKey: 'server1Desc'
+            },
+            'rede-vortex': {
+                ip: '169.155.126.41:9085',
+                descriptionKey: 'server2Desc'
+            }
+        };
+
+        let currentServer = 'vortex-network';
+
+        function updateServerDisplay() {
+            const server = servers[currentServer];
+            const ipText = document.getElementById('ip-text');
+            const descriptionElement = document.getElementById('server-description');
+            
+            ipText.textContent = server.ip;
+            
+            // Atualizar descrição com tradução atual
+            updateServerDescription();
+            
+            // Atualizar botões ativos
+            document.querySelectorAll('.server-btn').forEach(btn => {
+                if (btn.dataset.server === currentServer) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        function updateServerDescription() {
+            const server = servers[currentServer];
+            const descriptionElement = document.getElementById('server-description');
+            const t = translations[currentLang];
+            
+            if (t && t[server.descriptionKey]) {
+                descriptionElement.textContent = t[server.descriptionKey];
+            }
+        }
+
+        // ===== FUNCIONALIDADES =====
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navCenter = document.getElementById('navCenter');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navCenter.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navCenter.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navCenter.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        const languageToggle = document.getElementById('languageToggle');
+        const languageDropdown = document.getElementById('languageDropdown');
+        
+        languageToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            languageDropdown.classList.toggle('show');
+        });
+        
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.dataset.lang;
+                setLanguage(lang);
+                languageDropdown.classList.remove('show');
+            });
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (!languageToggle.contains(e.target) && !languageDropdown.contains(e.target)) {
+                languageDropdown.classList.remove('show');
+            }
+        });
+        
+        // Botões dos servidores
+        document.querySelectorAll('.server-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentServer = btn.dataset.server;
+                updateServerDisplay();
+            });
+        });
+        
+        let currentLang = 'pt';
+
+        function setLanguage(lang) {
+            if (!translations[lang]) return;
+            
+            currentLang = lang;
+            document.body.setAttribute('data-lang', lang);
+            document.documentElement.lang = lang;
+            
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.dataset.lang === lang) {
+                    option.classList.add('active');
+                }
+            });
+            
+            updateTranslations(lang);
+            localStorage.setItem('vortex-lang', lang);
+        }
+        
+        // ===== ANIMAÇÕES AO SCROLL =====
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            const animatedElements = document.querySelectorAll('.animate:not(.animated)');
+            animatedElements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight * 0.85;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.animationPlayState = 'running';
+                    element.classList.add('animated');
+                }
+            });
+        });
+        
+        // ===== COUNTDOWN CORRETO =====
+        function updateCountdown() {
+            const now = new Date();
+            
+            // Data alvo: 13 de janeiro, 15:00 UTC (12:00 Brasília)
+            const currentYear = now.getFullYear();
+            let targetDate = new Date(Date.UTC(currentYear, 0, 13, 15, 0, 0));
+            
+            if (now > targetDate) {
+                targetDate = new Date(Date.UTC(currentYear + 1, 0, 13, 15, 0, 0));
+            }
+            
+            const diff = targetDate - now;
+            
+            if (diff < 0) {
+                document.getElementById('countdown-days').textContent = '00';
+                document.getElementById('countdown-hours').textContent = '00';
+                document.getElementById('countdown-minutes').textContent = '00';
+                document.getElementById('countdown-seconds').textContent = '00';
+                const countdownTitleElement = document.getElementById('countdown-title');
+                const t = translations[currentLang];
+                countdownTitleElement.textContent = t ? 'HYTALE LANÇOU!' : 'HYTALE IS LIVE!';
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // ===== COPY IP =====
+        function copyIP() {
+            const ipText = document.getElementById('ip-text').textContent;
+            navigator.clipboard.writeText(ipText).then(() => {
+                const ipElement = document.getElementById('ip-text');
+                const originalText = ipElement.textContent;
+                const t = translations[currentLang];
+                ipElement.textContent = t.ipCopied || 'Copiado!';
+                ipElement.style.color = '#00ff88';
+                
+                setTimeout(() => {
+                    ipElement.textContent = originalText;
+                    ipElement.style.color = '#00d4ff';
+                }, 2000);
+            });
+        }
+        
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.animate');
+            animatedElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.03}s`;
+                element.style.animationPlayState = 'paused';
+            });
+            
+            const savedLang = localStorage.getItem('vortex-lang') || 'pt';
+            setLanguage(savedLang);
+            
+            // Inicializar servidor
+            updateServerDisplay();
+            
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
+        });
+    </script>
+</body>
+</html>
