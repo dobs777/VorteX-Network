@@ -488,135 +488,6 @@
         .btn-youtube { color: #FF0000; }
         .btn-youtube:hover { background: rgba(255, 0, 0, 0.1); }
         
-        /* ===== COUNTDOWN ===== */
-        .countdown-container {
-            margin: var(--spacing-xl) auto 0;
-            width: 100%;
-            max-width: 700px;
-            padding: 0 20px;
-        }
-        
-        .countdown-wrapper {
-            padding: .3em;
-            border: 1px solid rgba(106, 17, 203, 0.5);
-            border-radius: 5px;
-            background: rgba(10, 14, 23, 0.7);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 30px rgba(106, 17, 203, 0.3);
-        }
-        
-        .countdown {
-            position: relative;
-            width: 100%;
-            height: 85px;
-            padding: .4em 0;
-            box-sizing: border-box;
-            background: linear-gradient(to bottom, rgba(106, 17, 203, 0.2), rgba(10, 14, 23, 0.9));
-            white-space: nowrap;
-            border-radius: 4px;
-        }
-        
-        .countdown .block {
-            display: inline-block;
-            width: 25%;
-            margin: 0;
-            padding: .2em 0;
-            box-sizing: border-box;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            line-height: 1.3;
-        }
-        
-        .countdown .block:last-child {
-            border: 0;
-        }
-        
-        .countdown .block .digits {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-family: 'Lexend', sans-serif;
-            font-size: 2.1em;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-shadow: 0 0 10px rgba(106, 17, 203, 0.5);
-        }
-        
-        .countdown .block .label {
-            font-family: 'Nunito Sans', sans-serif;
-            font-size: .65em;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-        
-        .countdown-heading {
-            display: flex;
-            margin-bottom: 1.5rem;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-        
-        .countdown-heading .decoration {
-            position: relative;
-            content: "";
-            display: inline-block;
-            flex: 1;
-            vertical-align: middle;
-            height: 1px;
-            min-width: 20px;
-        }
-        
-        .countdown-heading .decoration::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            display: block;
-            width: 11px;
-            height: 11px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            transform: translateY(-50%);
-        }
-        
-        .countdown-heading .decoration.left::before {
-            right: -10px;
-        }
-        
-        .countdown-heading .decoration.right::before {
-            left: -10px;
-        }
-        
-        .countdown-heading .decoration.left {
-            margin-right: 10px;
-            background: linear-gradient(to right, rgba(106, 17, 203, 0) 0%, var(--primary) 25%, var(--primary) 100%);
-        }
-        
-        .countdown-heading .decoration.right {
-            margin-left: 10px;
-            background: linear-gradient(to left, rgba(106, 17, 203, 0) 0%, var(--primary) 25%, var(--primary) 100%);
-        }
-        
-        .countdown-heading h1 {
-            display: inline-block;
-            margin: -1px 1.4em 0 1.4em;
-            padding: 0;
-            background: linear-gradient(var(--accent), #adcde2);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-family: 'Nunito Sans', sans-serif;
-            font-weight: bold;
-            font-size: 1.1em;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            min-width: 180px;
-            height: 28px;
-            text-align: center;
-        }
-        
         /* ===== SECTIONS ===== */
         section {
             padding: var(--spacing-xl) 5%;
@@ -1202,11 +1073,6 @@
                 max-width: 600px;
             }
             
-            .countdown-heading h1 {
-                min-width: 160px;
-                font-size: 1em;
-            }
-            
             :root {
                 --spacing-xxl: 4rem;
                 --spacing-xl: 3rem;
@@ -1236,12 +1102,6 @@
             
             .hero-logo {
                 max-width: 350px;
-            }
-            
-            .countdown-heading h1 {
-                min-width: 140px;
-                font-size: 0.9em;
-                margin: -1px 1em 0 1em;
             }
             
             .info-card h3,
@@ -1319,34 +1179,6 @@
             
             .hero-logo {
                 max-width: 300px;
-            }
-            
-            .countdown {
-                height: 75px;
-            }
-            
-            .countdown .block .digits {
-                font-size: 1.8rem;
-            }
-            
-            .countdown-heading {
-                flex-wrap: wrap;
-            }
-            
-            .countdown-heading h1 {
-                order: 1;
-                width: 100%;
-                margin: 0.5rem 0;
-                min-width: auto;
-                height: auto;
-            }
-            
-            .countdown-heading .decoration.left {
-                order: 0;
-            }
-            
-            .countdown-heading .decoration.right {
-                order: 2;
             }
             
             .roadmap-cards,
@@ -1435,35 +1267,6 @@
                 max-width: 250px;
             }
             
-            .countdown {
-                height: 65px;
-            }
-            
-            .countdown .block .digits {
-                font-size: 1.5rem;
-            }
-            
-            .countdown .block .label {
-                font-size: 0.6rem;
-            }
-            
-            .countdown-heading h1 {
-                font-size: 0.85em;
-                margin: 0.5rem 0.5em;
-            }
-            
-            .countdown-heading .decoration {
-                min-width: 15px;
-            }
-            
-            .countdown-heading .decoration.left {
-                margin-right: 5px;
-            }
-            
-            .countdown-heading .decoration.right {
-                margin-left: 5px;
-            }
-            
             .ip-box h3 {
                 font-size: 1.3rem;
                 padding: 0 0.5rem;
@@ -1501,23 +1304,6 @@
             .social-btn {
                 padding: 0.7rem 1.2rem;
                 font-size: 0.9rem;
-            }
-            
-            .countdown {
-                height: 60px;
-            }
-            
-            .countdown .block .digits {
-                font-size: 1.3rem;
-            }
-            
-            .countdown .block .label {
-                font-size: 0.55rem;
-            }
-            
-            .countdown-heading h1 {
-                font-size: 0.75em;
-                min-width: 120px;
             }
             
             .info-card,
@@ -1610,7 +1396,7 @@
         <img src="Fotos/logo.png" alt="VorteX Network Logo" class="hero-logo animate delay-1">
         
         <p class="hero-subtitle animate" data-translate="heroSubtitle">
-            Prepare-se para a aventura definitiva do Hytale! Nosso servidor global começa com gameplay vanilla puro e vai evoluir junto com você, sempre ouvindo o que a comunidade tem a dizer.
+            O servidor global de Hytale já está online! Começamos com gameplay vanilla puro e vamos evoluir junto com você, sempre ouvindo o que a comunidade tem a dizer.
         </p>
 
         <div class="social-links">
@@ -1628,35 +1414,6 @@
             </a>
         </div>
         
-        <!-- Countdown -->
-        <div class="countdown-container animate delay-3">
-            <div class="countdown-heading">
-                <span class="decoration left"></span>
-                <h1 id="countdown-title"></h1>
-                <span class="decoration right"></span>
-            </div>
-            
-            <div class="countdown-wrapper">
-                <div class="countdown" id="countdown">
-                    <div class="block">
-                        <div class="digits" id="countdown-days">00</div>
-                        <div class="label" data-translate="daysLabel">Dias</div>
-                    </div>
-                    <div class="block">
-                        <div class="digits" id="countdown-hours">00</div>
-                        <div class="label" data-translate="hoursLabel">Horas</div>
-                    </div>
-                    <div class="block">
-                        <div class="digits" id="countdown-minutes">00</div>
-                        <div class="label" data-translate="minutesLabel">Minutos</div>
-                    </div>
-                    <div class="block">
-                        <div class="digits" id="countdown-seconds">00</div>
-                        <div class="label" data-translate="secondsLabel">Segundos</div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- About Server -->
@@ -1674,7 +1431,7 @@
                     <i class="fas fa-globe-americas"></i>
                     <h3 data-translate="aboutCard1Title">Infraestrutura Dupla</h3>
                     <p data-translate="aboutCard1Desc">
-                        Lançamento com servidores simultâneos no Brasil e EUA! Garantimos baixa latência para jogadores da América Latina e América do Norte desde o primeiro dia.
+                        Servidores simultâneos no Brasil e EUA! Garantimos baixa latência para jogadores da América Latina e América do Norte.
                     </p>
                 </div>
                 
@@ -1852,12 +1609,12 @@
         <div class="faq-container">
             <div class="faq-item animate delay-1">
                 <div class="faq-question">
-                    <span data-translate="faq1Q">Quando o servidor será lançado?</span>
+                    <span data-translate="faq1Q">Quando o servidor foi lançado?</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
                     <p data-translate="faq1A">
-                        Lançaremos simultaneamente com o Hytale oficial! Estamos em fase final de preparação para garantir uma experiência perfeita desde o primeiro dia.
+                        Lançamos simultaneamente com o Hytale oficial! Estamos online e preparados para receber todos os jogadores.
                     </p>
                 </div>
             </div>
@@ -1876,12 +1633,12 @@
             
             <div class="faq-item animate delay-3">
                 <div class="faq-question">
-                    <span data-translate="faq3Q">Quais regiões serão atendidas?</span>
+                    <span data-translate="faq3Q">Quais regiões são atendidas?</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
                     <p data-translate="faq3A">
-                        Começaremos com servidores simultâneos no Brasil e Estados Unidos! Garantimos baixa latência para jogadores da América Latina e América do Norte.
+                        Começamos com servidores simultâneos no Brasil e Estados Unidos! Garantimos baixa latência para jogadores da América Latina e América do Norte.
                     </p>
                 </div>
             </div>
@@ -1893,7 +1650,7 @@
                 </div>
                 <div class="faq-answer">
                     <p data-translate="faq4A">
-                        Iniciaremos com vanilla puro para manter a experiência autêntica. Com o feedback da comunidade, adicionaremos mods e plugins cuidadosamente selecionados.
+                        Iniciamos com vanilla puro para manter a experiência autêntica. Com o feedback da comunidade, adicionaremos mods e plugins cuidadosamente selecionados.
                     </p>
                 </div>
             </div>
@@ -1972,11 +1729,7 @@
                 currentLanguage: "Português",
                 
                 // Hero
-                heroSubtitle: "Prepare-se para a aventura definitiva do Hytale! Nosso servidor global começa com gameplay vanilla puro e vai evoluir junto com você, sempre ouvindo o que a comunidade tem a dizer.",
-                daysLabel: "Dias",
-                hoursLabel: "Horas",
-                minutesLabel: "Minutos",
-                secondsLabel: "Segundos",
+                heroSubtitle: "O servidor global de Hytale já está online! Começamos com gameplay vanilla puro e vamos evoluir junto com você, sempre ouvindo o que a comunidade tem a dizer.",
                 followTwitter: "Twitter",
                 joinCommunity: "Discord",
                 watchYouTube: "YouTube",
@@ -1985,7 +1738,7 @@
                 aboutTitle: "Nosso Servidor",
                 aboutSubtitle: "Criado por jogadores experientes que sabem o que faz uma comunidade durar",
                 aboutCard1Title: "Infraestrutura Dupla",
-                aboutCard1Desc: "Lançamento com servidores simultâneos no Brasil e EUA! Garantimos baixa latência para jogadores da América Latina e América do Norte desde o primeiro dia.",
+                aboutCard1Desc: "Servidores simultâneos no Brasil e EUA! Garantimos baixa latência para jogadores da América Latina e América do Norte.",
                 aboutCard2Title: "Hytale Autêntico",
                 aboutCard2Desc: "Fiel ao espírito original: começamos vanilla puro e só adicionamos o que a comunidade aprovar. Sem mudanças radicais sem o consenso de todos.",
                 aboutCard3Title: "Evolução Constante",
@@ -2045,14 +1798,14 @@
                 // FAQ
                 faqTitle: "Perguntas Frequentes",
                 faqSubtitle: "Tudo que você precisa saber sobre a VorteX Network",
-                faq1Q: "Quando o servidor será lançado?",
-                faq1A: "Lançaremos simultaneamente com o Hytale oficial! Estamos em fase final de preparação para garantir uma experiência perfeita desde o primeiro dia.",
+                faq1Q: "Quando o servidor foi lançado?",
+                faq1A: "Lançamos simultaneamente com o Hytale oficial! Estamos online e preparados para receber todos os jogadores.",
                 faq2Q: "Há algum custo para jogar?",
                 faq2A: "Completamente gratuito! Ofereceremos itens cosméticos opcionais e benefícios para apoiadores que ajudarão a manter nossa infraestrutura premium.",
-                faq3Q: "Quais regiões serão atendidas?",
-                faq3A: "Começaremos com servidores simultâneos no Brasil e Estados Unidos! Garantimos baixa latencia para jogadores da América Latina e América do Norte.",
+                faq3Q: "Quais regiões são atendidas?",
+                faq3A: "Começamos com servidores simultâneos no Brasil e Estados Unidos! Garantimos baixa latencia para jogadores da América Latina e América do Norte.",
                 faq4Q: "Haverá suporte a mods e plugins?",
-                faq4A: "Iniciaremos com vanilla puro para manter a experiência autêntica. Com o feedback da comunidade, adicionaremos mods e plugins cuidadosamente selecionados.",
+                faq4A: "Iniciamos com vanilla puro para manter a experiência autêntica. Com o feedback da comunidade, adicionaremos mods e plugins cuidadosamente selecionados.",
                 faq5Q: "Posso contribuir com o desenvolvimento?",
                 faq5A: "Junte-se ao nosso Discord! Buscamos ativamente feedback, realizamos testes beta e discutimos novas funcionalidades. A comunidade molda nosso desenvolvimento.",
                 
@@ -2079,11 +1832,7 @@
                 currentLanguage: "English",
                 
                 // Hero
-                heroSubtitle: "Get ready for the ultimate Hytale adventure! Our global server starts with pure vanilla gameplay and evolves with you, always listening to community feedback.",
-                daysLabel: "Days",
-                hoursLabel: "Hours",
-                minutesLabel: "Minutes",
-                secondsLabel: "Seconds",
+                heroSubtitle: "The global Hytale server is now live! We start with pure vanilla gameplay and evolve with you, always listening to community feedback.",
                 followTwitter: "Twitter",
                 joinCommunity: "Discord",
                 watchYouTube: "YouTube",
@@ -2092,7 +1841,7 @@
                 aboutTitle: "Our Server",
                 aboutSubtitle: "Created by experienced players who know what makes a community last",
                 aboutCard1Title: "Dual Infrastructure",
-                aboutCard1Desc: "Launch with simultaneous servers in Brazil and USA! We guarantee low latency for players in Latin America and North America from day one.",
+                aboutCard1Desc: "Simultaneous servers in Brazil and USA! We guarantee low latency for players in Latin America and North America.",
                 aboutCard2Title: "Authentic Hytale",
                 aboutCard2Desc: "True to the original spirit: we start pure vanilla and only add what the community approves. No radical changes without consensus.",
                 aboutCard3Title: "Constant Evolution",
@@ -2152,14 +1901,14 @@
                 // FAQ
                 faqTitle: "Frequently Asked Questions",
                 faqSubtitle: "Everything you need to know about VorteX Network",
-                faq1Q: "When will the server launch?",
-                faq1A: "We'll launch simultaneously with official Hytale! We're in final preparation to ensure a perfect experience from day one.",
+                faq1Q: "When was the server launched?",
+                faq1A: "We launched simultaneously with official Hytale! We're online and ready to welcome all players.",
                 faq2Q: "Is there any cost to play?",
                 faq2A: "Completely free! We'll offer optional cosmetic items and supporter benefits that help maintain our premium infrastructure.",
-                faq3Q: "Which regions will be served?",
-                faq3A: "We'll start with simultaneous servers in Brazil and United States! We guarantee low latency for players in Latin America and North America.",
+                faq3Q: "Which regions are served?",
+                faq3A: "We started with simultaneous servers in Brazil and United States! We guarantee low latency for players in Latin America and North America.",
                 faq4Q: "Will there be mod and plugin support?",
-                faq4A: "We'll start with pure vanilla to maintain the authentic experience. With community feedback, we'll add carefully selected mods and plugins.",
+                faq4A: "We started with pure vanilla to maintain the authentic experience. With community feedback, we'll add carefully selected mods and plugins.",
                 faq5Q: "Can I contribute to development?",
                 faq5A: "Join our Discord! We actively seek feedback, conduct beta tests, and discuss new features. The community shapes our development.",
                 
@@ -2186,11 +1935,7 @@
                 currentLanguage: "Español",
                 
                 // Hero
-                heroSubtitle: "¡Prepárate para la aventura definitiva de Hytale! Nuestro servidor global comienza con jugabilidad vanilla puro y evoluciona contigo, siempre escuchando los comentarios de la comunidad.",
-                daysLabel: "Días",
-                hoursLabel: "Horas",
-                minutesLabel: "Minutos",
-                secondsLabel: "Segundos",
+                heroSubtitle: "¡El servidor global de Hytale ya está en línea! Comenzamos con jugabilidad vanilla puro y evolucionamos contigo, siempre escuchando los comentarios de la comunidad.",
                 followTwitter: "Twitter",
                 joinCommunity: "Discord",
                 watchYouTube: "YouTube",
@@ -2199,7 +1944,7 @@
                 aboutTitle: "Nuestro Servidor",
                 aboutSubtitle: "Creado por jugadores experimentados que saben lo que hace durar a una comunidad",
                 aboutCard1Title: "Infraestructura Dual",
-                aboutCard1Desc: "¡Lanzamiento con servidores simultáneos en Brasil y EE.UU.! Garantizamos baja latencia para jugadores de América Latina y Norteamérica desde el primer día.",
+                aboutCard1Desc: "¡Servidores simultáneos en Brasil y EE.UU.! Garantizamos baja latencia para jugadores de América Latina y Norteamérica.",
                 aboutCard2Title: "Hytale Auténtico",
                 aboutCard2Desc: "Fiel al espíritu original: comenzamos vanilla puro y solo agregamos lo que la comunidad aprueba. Sin cambios radicales sin consenso.",
                 aboutCard3Title: "Evolución Constante",
@@ -2259,14 +2004,14 @@
                 // FAQ
                 faqTitle: "Preguntas Frecuentes",
                 faqSubtitle: "Todo lo que necesitas saber sobre VorteX Network",
-                faq1Q: "¿Cuándo se lanzará el servidor?",
-                faq1A: "¡Lanzaremos simultáneamente con Hytale oficial! Estamos en preparación final para garantizar una experiencia perfecta desde el primer día.",
+                faq1Q: "¿Cuándo se lanzó el servidor?",
+                faq1A: "¡Lanzamos simultáneamente con Hytale oficial! Estamos en línea y listos para recibir a todos los jugadores.",
                 faq2Q: "¿Hay algún costo para jugar?",
                 faq2A: "¡Completamente gratis! Ofreceremos elementos cosméticos opcionales y beneficios para seguidores que ayudarán a mantener nuestra infraestructura premium.",
-                faq3Q: "¿Qué regiones serán atendidas?",
-                faq3A: "¡Comenzaremos con servidores simultáneos en Brasil y Estados Unidos! Garantizamos baja latencia para jugadores de América Latina y Norteamérica.",
+                faq3Q: "¿Qué regiones son atendidas?",
+                faq3A: "¡Comenzamos con servidores simultáneos en Brasil y Estados Unidos! Garantizamos baja latencia para jugadores de América Latina y Norteamérica.",
                 faq4Q: "¿Habrá soporte para mods y plugins?",
-                faq4A: "Comenzaremos con vanilla puro para mantener la experiencia auténtica. Con los comentarios de la comunidad, agregaremos mods y plugins cuidadosamente seleccionados.",
+                faq4A: "Comenzamos con vanilla puro para mantener la experiencia auténtica. Con los comentarios de la comunidad, agregaremos mods y plugins cuidadosamente seleccionados.",
                 faq5Q: "¿Puedo contribuir al desarrollo?",
                 faq5A: "¡Únete a nuestro Discord! Buscamos activamente comentarios, realizamos pruebas beta y discutimos nuevas funciones. La comunidad moldea nuestro desarrollo.",
                 
@@ -2281,76 +2026,6 @@
                 copyright: "© 2026 VorteX Network. Todos los derechos reservados.",
                 notAffiliated: "Este servidor no está afiliado ni respaldado por Hypixel Studios o equipo de desarrollo de Hytale."
             }
-        };
-
-        // ===== MENSAGENS DO COUNTDOWN (traduzidas) =====
-        const countdownMessages = {
-            pt: [
-                "FALTA POUCO!",
-                "A HYPE É REAL",
-                "NÃO AGUENTO MAIS",
-                "EM BREVE™",
-                "QUASE LÁ",
-                "FIQUE ATENTO",
-                "CONTANDO OS DIAS",
-                "NÍVEL DE EXPECTATIVA: 100",
-                "PREPARE-SE",
-                "A ESPERA ESTÁ QUASE NO FIM",
-                "AVENTURA À VISTA",
-                "QUE A CONTAGEM REGRESSIVA COMECE",
-                "PREPARE SEUS MUNDOS",
-                "A JORNADA COMEÇA",
-                "EQUIPE-SE",
-                "SEGUREM-SE",
-                "O FUTURO ESTÁ PRÓXIMO",
-                "TANTO PARA EXPLORAR",
-                "O MELHOR AINDA ESTÁ POR VIR",
-                "PRONTO PARA AÇÃO"
-            ],
-            en: [
-                "HERE WE GO BOIS",
-                "HYPE IS REAL",
-                "CAN'T WAIT ANYMORE",
-                "SOON™",
-                "ALMOST THERE",
-                "STAY TUNED",
-                "COUNTING THE DAYS",
-                "EXCITEMENT LEVEL: 100",
-                "GET READY",
-                "THE WAIT IS ALMOST OVER",
-                "ADVENTURE AWAITS",
-                "LET THE COUNTDOWN BEGIN",
-                "PREPARE YOUR WORLDS",
-                "THE JOURNEY BEGINS",
-                "GEAR UP",
-                "BRACE YOURSELVES",
-                "THE FUTURE IS NEAR",
-                "SO MUCH TO EXPLORE",
-                "THE BEST IS YET TO COME",
-                "READY FOR ACTION"
-            ],
-            es: [
-                "¡FALTA POCO!",
-                "LA EXPECTATIVA ES REAL",
-                "NO AGUANTO MÁS",
-                "PRONTO™",
-                "CASI ALLÍ",
-                "PERMANEZCAN ATENTOS",
-                "CONTANDO LOS DÍAS",
-                "NIVEL DE EMOCIÓN: 100",
-                "PREPÁRENSE",
-                "LA ESPERA ESTÁ CASI TERMINADA",
-                "LA AVENTURA ESPERA",
-                "QUE COMIENCE LA CUENTA REGRESIVA",
-                "PREPAREN SUS MUNDOS",
-                "COMIENZA EL VIAJE",
-                "EQUÍPENSE",
-                "AFÉRRENSE",
-                "EL FUTURO ESTÁ CERCA",
-                "TANTO POR EXPLORAR",
-                "LO MEJOR ESTÁ POR VENIR",
-                "LISTO PARA LA ACCIÓN"
-            ]
         };
 
         // ===== SISTEMA DE TRADUÇÃO =====
@@ -2380,69 +2055,8 @@
             
             currentLangEl.innerHTML = `<span class="lang-flag">${flag}</span><span>${langName}</span><i class="fas fa-chevron-down"></i>`;
             
-            // Atualizar mensagens do countdown
-            updateCountdownTitle(lang);
-            
             // Atualizar descrição do servidor ativo
             updateServerDescription();
-        }
-
-        // ===== EFEITO DE SCRAMBLE NO COUNTDOWN =====
-        function scrambleText(element, newText, duration = 600) {
-            const chars = '!<>-_\\/[]{}—=+*^?#________';
-            const originalText = element.textContent;
-            const length = Math.max(originalText.length, newText.length);
-            let frame = 0;
-            const totalFrames = Math.ceil(duration / 30);
-            
-            element.style.minWidth = element.offsetWidth + 'px';
-            
-            const interval = setInterval(() => {
-                let displayText = '';
-                for (let i = 0; i < length; i++) {
-                    if (i < (frame / totalFrames) * length) {
-                        displayText += newText[i] || '';
-                    } else {
-                        displayText += chars[Math.floor(Math.random() * chars.length)];
-                    }
-                }
-                element.textContent = displayText;
-                frame++;
-                if (frame > totalFrames) {
-                    clearInterval(interval);
-                    element.textContent = newText;
-                    element.style.minWidth = '';
-                }
-            }, 30);
-        }
-
-        // ===== ATUALIZAR TÍTULO DO COUNTDOWN =====
-        let currentTitleIndex = 0;
-        let titleInterval;
-
-        function updateCountdownTitle(lang) {
-            const countdownTitleElement = document.getElementById('countdown-title');
-            const messages = countdownMessages[lang] || countdownMessages['en'];
-            
-            // Limpar intervalo anterior
-            if (titleInterval) {
-                clearInterval(titleInterval);
-            }
-            
-            // Selecionar título inicial aleatório
-            currentTitleIndex = Math.floor(Math.random() * messages.length);
-            countdownTitleElement.textContent = messages[currentTitleIndex];
-            
-            // Configurar intervalo para mudar títulos
-            titleInterval = setInterval(() => {
-                let newIndex;
-                do {
-                    newIndex = Math.floor(Math.random() * messages.length);
-                } while (newIndex === currentTitleIndex);
-                
-                currentTitleIndex = newIndex;
-                scrambleText(countdownTitleElement, messages[currentTitleIndex], 600);
-            }, 10000); // 10 segundos
         }
 
         // ===== SISTEMA DE SERVIDORES =====
@@ -2577,45 +2191,6 @@
                 }
             });
         });
-        
-        // ===== COUNTDOWN CORRETO =====
-        function updateCountdown() {
-            const now = new Date();
-            
-            // Data alvo: 13 de janeiro, 15:00 UTC (12:00 Brasília)
-            const currentYear = now.getFullYear();
-            let targetDate = new Date(Date.UTC(currentYear, 0, 13, 15, 0, 0));
-            
-            if (now > targetDate) {
-                targetDate = new Date(Date.UTC(currentYear + 1, 0, 13, 15, 0, 0));
-            }
-            
-            const diff = targetDate - now;
-            
-            if (diff < 0) {
-                document.getElementById('countdown-days').textContent = '00';
-                document.getElementById('countdown-hours').textContent = '00';
-                document.getElementById('countdown-minutes').textContent = '00';
-                document.getElementById('countdown-seconds').textContent = '00';
-                const countdownTitleElement = document.getElementById('countdown-title');
-                const t = translations[currentLang];
-                countdownTitleElement.textContent = t ? 'HYTALE LANÇOU!' : 'HYTALE IS LIVE!';
-                return;
-            }
-            
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
-        }
-        
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
         
         // ===== COPY IP =====
         function copyIP() {
